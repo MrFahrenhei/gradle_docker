@@ -6,12 +6,13 @@ import java.sql.DriverManager;
 
 public class DatabaseConnector {
     public static void main(String[] args){
-        String dbHost = System.getenv().getOrDefault("DB_HOST", "localhost");
-        String dbPort = System.getenv().getOrDefault("DB_PORT", "5432");
-        String dbUser = System.getenv().getOrDefault("DB_USER", "admin");
-        String dbPass = System.getenv().getOrDefault("DB_PASS", "secure_pass");
+        String dbHost = System.getenv().getOrDefault("POSTGRES_HOST", "localhost");
+        String dbPort = System.getenv().getOrDefault("POSTGRES_PORT", "5432");
+        String dbUser = System.getenv().getOrDefault("POSTGRES_USER", "admin");
+        String dbPass = System.getenv().getOrDefault("POSTGRES_PASSWORD", "secure_pass");
+        String dbName = System.getenv().getOrDefault("POSTGRES_DB", "system_db");
 
-        String jdbcUrl = String.format("jdbc:postgresql://%s:%s/system_db", dbHost, dbPort);
+        String jdbcUrl = String.format("jdbc:postgresql://%s:%s/%s", dbHost, dbPort, dbName);
 
         System.out.println("[INFO] Bootstrapping Application...");
         try(Connection ignored = DriverManager.getConnection(jdbcUrl, dbUser, dbPass)){

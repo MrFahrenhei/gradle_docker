@@ -9,6 +9,12 @@ repositories {
     mavenCentral()
 }
 
+tasks.jar{
+    manifest{
+        attributes ("Main-Class" to "DatabaseConnector")
+    }
+}
+
 dependencies {
     implementation("org.postgresql:postgresql:42.7.13")
     testImplementation(platform("org.junit:junit-bom:6.0.0"))
